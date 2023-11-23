@@ -8,7 +8,6 @@ def Testing() {
 
 def DeployJAr() {
     echo "Deploying the application on $ENV"
-    echo "Deploying the application version of $VERSION"
 }
 
 return this
