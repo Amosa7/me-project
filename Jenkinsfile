@@ -4,6 +4,11 @@ def gv
 
 pipeline {
     agent any
+
+    parameters([
+        choice(name: 'ENV', choices: ['dev', 'staging', 'prod'], description: 'Select the environment'),
+         booleanParam(name: 'ENABLE_TESTS', defaultValue: false, description: 'Enable testing')
+    ]) 
     
     stages {
 
@@ -16,6 +21,10 @@ pipeline {
         }
 
         stage('BuildJar') {
+
+            when {
+                expression {params.ENV}
+            }
             steps {
                 script {
                     gv.BuildJar()
@@ -24,6 +33,10 @@ pipeline {
         }
 
         stage('Testing') {
+
+            when {
+                expression {params.ENABLE_TESTS}
+            }
             steps {
                 script {
                     gv.Testing()
