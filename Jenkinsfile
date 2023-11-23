@@ -6,7 +6,7 @@ pipeline {
     agent any
 
     parameters {
-        choice(name: 'ENV', choices: ['dev', 'staging', 'prod'], description: 'Select the environment'),
+        choice(name: 'ENV', choices: ['dev', 'staging', 'prod'], description: 'Select the environment')
         booleanParam(name: 'ENABLE_TESTS', defaultValue: false, description: 'Enable testing')
     } 
     
