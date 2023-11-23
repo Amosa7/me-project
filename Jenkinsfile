@@ -1,13 +1,24 @@
 #!/usr/bin/env groovy
 
+def gv
+
 pipeline {
     agent any
     
     stages {
+
+        stage("init") {
+            steps {
+                script{
+                    gv = load "script.groovy"
+                }
+            }
+        }
+
         stage('BuildJar') {
             steps {
                 script {
-                    echo "Building Jar of the Application"
+                    gv.BuildJar()
                 }
             }
         }
@@ -15,7 +26,7 @@ pipeline {
         stage('Testing') {
             steps {
                 script {
-                    echo "Testing the Application"
+                    gv.Testing()
                 }
             }
         }
@@ -23,7 +34,7 @@ pipeline {
         stage('DeployJar') {
             steps {
                 script {
-                    echo "Deploying the application"
+                    gv.DeployJAr()
                 }
             }
         }
