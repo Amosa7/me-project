@@ -5,10 +5,10 @@ def gv
 pipeline {
     agent any
 
-    parameters(
+    parameters {
         choice(name: 'ENV', choices: ['dev', 'staging', 'prod'], description: 'Select the environment'),
          booleanParam(name: 'ENABLE_TESTS', defaultValue: false, description: 'Enable testing')
-    ) 
+    } 
     
     stages {
 
