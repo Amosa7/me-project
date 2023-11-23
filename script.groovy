@@ -7,7 +7,7 @@ def Testing() {
 }
 
 def DeployJAr() {
-    echo "Deploying the application $BRANCH_NAME"
+    echo "Deploying the application $ENV"
 }
 
 return this
