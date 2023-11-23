@@ -11,7 +11,6 @@ pipeline {
     } 
     
     stages {
-
         stage("init") {
             steps {
                 script{
@@ -21,7 +20,6 @@ pipeline {
         }
 
         stage('BuildJar') {
-
             when {
                 expression { params.ENV }
             }
@@ -33,7 +31,6 @@ pipeline {
         }
 
         stage('Testing') {
-
             when {
                 expression { params.ENABLE_TESTS }
             }
