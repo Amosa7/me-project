@@ -8,9 +8,11 @@ pipeline {
     parameters {
         choice(name: 'ENV', choices: ['dev', 'staging', 'prod'], description: 'Select the environment')
         booleanParam(name: 'ENABLE_TESTS', defaultValue: false, description: 'Enable testing')
-    } 
+        choice(name: 'ENV', choices: ['1.2.3', '2.1.0', '2.1.1'], description: 'Select the environment')
+    }
     
     stages {
+
         stage("init") {
             steps {
                 script{
@@ -20,6 +22,7 @@ pipeline {
         }
 
         stage('BuildJar') {
+
             when {
                 expression { params.ENV }
             }
@@ -31,6 +34,7 @@ pipeline {
         }
 
         stage('Testing') {
+
             when {
                 expression { params.ENABLE_TESTS }
             }
@@ -42,6 +46,15 @@ pipeline {
         }
 
         stage('DeployJar') {
+            input {
+                message "Kindly inout the version of the Application"
+                parameters {
+                    choice(name: 'VERSION', choices: ['1.2.3', '2.1.0', '2.1.1'], description: 'Select the App Version')
+                }
+                ok "Done"
+
+
+            }
             steps {
                 script {
                     gv.DeployJAr()
